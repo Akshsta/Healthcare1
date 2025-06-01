@@ -1,0 +1,17 @@
+---
+- name: Deploy Medicure Application
+  hosts: all
+  become: yes
+  tasks:
+    - name: Install Docker
+      apt:
+        name: docker.io
+        state: present
+    - name: Run Medicure Docker Container
+      docker_container:
+        name: medicure
+        image: medicure:latest
+        state: started
+        ports:
+          - "8080:8080"
+
